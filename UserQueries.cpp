@@ -27,7 +27,17 @@ int main()
 		}
 		else if (command == "post")
 		{
+			std::string name, city;
+			std::cout << "Enter name: ";
+			std::cin >> name;
 
+			std::cout << "Enter city: ";
+			std::cin >> city;
+
+			cpr::Response r = cpr::Post(cpr::Url("http://httpbin.org/post"),
+				cpr::Payload({ {"name ", name.c_str()}, {"city ", city.c_str()} }));
+
+			std::cout << r.text << std::endl;
 		}
 		else if (command == "put")
 		{
