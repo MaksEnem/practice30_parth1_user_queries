@@ -29,9 +29,9 @@ int main()
 				cpr::Header({ {"forms", name}}));
 			std::cout << request.text << std::endl;
 
-			/*request = cpr::Get(cpr::Url("http://httpbin.org/headers"),
+			request = cpr::Get(cpr::Url("http://httpbin.org/headers"),
 				cpr::Header({ {"forms", city} }));
-			std::cout << request.text << std::endl;*/
+			std::cout << request.text << std::endl;
 
 
 
@@ -55,14 +55,19 @@ int main()
 			/*assert(cpr::Post(cpr::Url("http://www.httpbin.org/put"),
 				cpr::Payload{ {"name", name.c_str()} }).status_code == 405);*/
 
-			cpr::Post(cpr::Url("http://www.httpbin.org/put"),
-				cpr::Payload{ {"name", name.c_str()} });
+			cpr::Post(cpr::Url("http://www.httpbin.org/put"));
+				//cpr::Payload{ {"name", name.c_str()} });
 
+			std::cout << "Enter name: ";
+			//std::cin >> name;			
+			std::cout << "Enter city: ";
+			//std::cin >> city;
+			
 			name = "Georg";
-			//city = "Magadan";
+			city = "Krasnodar";
 			
 			request = cpr::Put(cpr::Url("http://httpbin.org/put"),
-				cpr::Payload({ {"name", name.c_str()}}));
+				cpr::Payload({ {"name", name.c_str()}, {"city ", city.c_str()} }));
 
 			std::cout << request.text << std::endl;
 		}
@@ -72,7 +77,16 @@ int main()
 		}
 		else if (command == "patch")
 		{
+			cpr::Post(cpr::Url("http://www.httpbin.org/patch"));
+			std::cout << "Enter city: ";
+			//std::cin >> city;
+			
+			city = "Krasnodar";
 
+			request = cpr::Patch(cpr::Url("http://httpbin.org/patch"),
+				cpr::Payload({{"city ", city.c_str()} }));
+
+			std::cout << request.text << std::endl;
 		}
 		else if (command != "exit")
 		{
